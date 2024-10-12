@@ -12,6 +12,7 @@ const StartServer = async()=>{
     ExpressApp(app)
     try {
         await sequelize.authenticate();
+        await sequelize.sync()
         Logger.log('Database Connection has been established successfully.');
     } catch (error) {
         Logger.error(`Unable to connect to the database ${(error as Error).message}`);

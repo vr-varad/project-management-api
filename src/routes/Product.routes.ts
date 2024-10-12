@@ -1,4 +1,4 @@
-import express from 'express'
+import express, { Router } from 'express'
 import {
     AddProduct,
     DeleteProduct,
@@ -7,7 +7,7 @@ import {
     UpdateProduct
 } from '../controller/Product.controller'
 
-const router = express.Router()
+const router: Router = express.Router()
 
 router.post('/products', AddProduct)
 router.get('/products', GetAllProducts)
