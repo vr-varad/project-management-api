@@ -10,6 +10,9 @@ const ExpressApp = (app: Application) => {
     app.use(express.json())
     app.use(express.urlencoded({ extended: true }))
     app.use(limiter)
+    app.get('/',(req:Request, res:Response)=>{
+        res.send('Project-Management-API')
+    })
     app.use(UserRouter)
     app.use((err:Error, req:Request, res:Response, next:NextFunction) => {
         Logger.error(err.message);

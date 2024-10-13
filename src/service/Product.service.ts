@@ -1,4 +1,4 @@
-import { CreateProductInputs, UpdateProductInputs } from '../dto/Products'
+import { CreateProductInputs, UpdateProductInputs } from '../validators/Product.validator'
 import Product from '../models/Product.model'
 import { DataBaseError, NotFoundError } from '../utils/errorHandler'
 import Logger from '../utils/logger'
@@ -88,29 +88,9 @@ class ProductService {
                 throw new NotFoundError('Product Not Found')
             }
 
-            const updateData: Partial<UpdateProductInputs> = {}
-
-            if (ProductData.name !== undefined)
-                updateData.name = ProductData.name
-            if (ProductData.price !== undefined && ProductData.price !== 0)
-                updateData.price = ProductData.price
-            if (
-                ProductData.description !== undefined &&
-                ProductData.description !== ''
-            )
-                updateData.description = ProductData.description
-            if (
-                ProductData.category !== undefined &&
-                ProductData.category !== ''
-            )
-                updateData.category = ProductData.category
-
-            if (Object.keys(updateData).length === 0) {
-                return product // Nothing to update, return the original product
-            }
             await Product.update(
                 {
-                    ...updateData
+                    ...ProductData
                 },
                 {
                     where: {

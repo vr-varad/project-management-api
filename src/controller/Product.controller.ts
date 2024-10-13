@@ -1,16 +1,17 @@
 import { NextFunction, Request, Response } from 'express'
 import ProductService from '../service/Product.service'
 import { StatusCodes } from 'http-status-codes'
-import { CreateProductInputs, UpdateProductInputs } from '../dto/Products'
-import { CreateProductSchema, UpdateProductSchema } from '../validators/Product.validator'
+import {
+    CreateProductSchema,
+    UpdateProductSchema
+} from '../validators/Product.validator'
 
 const projectService = new ProductService()
 
 const AddProduct = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const ProductData = CreateProductSchema.parse(req.body)
-        const { name, price, description, category } =
-            ProductData as CreateProductInputs
+        const { name, price, description, category } = ProductData
         const product = await projectService.AddProduct({
             name,
             price,
@@ -68,7 +69,7 @@ const GetProductByName = async (
     next: NextFunction
 ) => {
     try {
-        const { name: productName} = req.params
+        const { name: productName } = req.params
         const product = await projectService.GetProductByName(productName)
         res.status(StatusCodes.OK).json({
             success: true,
@@ -85,7 +86,8 @@ const GetProductByCategory = async (
 ) => {
     try {
         const { category: productCategory } = req.params
-        const product = await projectService.GetProductByCategory(productCategory)
+        const product =
+            await projectService.GetProductByCategory(productCategory)
         res.status(StatusCodes.OK).json({
             success: true,
             product
@@ -103,8 +105,7 @@ const UpdateProduct = async (
     try {
         const { id: productId } = req.params
         const ProductData = UpdateProductSchema.parse(req.body)
-        const { name, price, description, category } =
-            ProductData as UpdateProductInputs
+        const { name, price, description, category } = ProductData
         const product = await projectService.UpdateProduct(Number(productId), {
             name,
             price,
