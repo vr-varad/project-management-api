@@ -34,6 +34,9 @@ class ProductService {
     async GetProductById(ProductId: number) {
         try {
             const product = await Product.findByPk(ProductId)
+            if (!product) {
+                throw new NotFoundError('Product Not Found')
+            }
             return product
         } catch (error) {
             Logger.error(
