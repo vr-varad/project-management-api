@@ -4,10 +4,12 @@ import { UserRouter } from '../routes/Product.routes'
 import Logger from '../utils/logger'
 import { StatusCodes } from 'http-status-codes'
 import { ZodError } from 'zod'
+import limiter from '../utils/rateLimiter'
 
 const ExpressApp = (app: Application) => {
     app.use(express.json())
     app.use(express.urlencoded({ extended: true }))
+    app.use(limiter)
     app.use(UserRouter)
     app.use((err:Error, req:Request, res:Response, next:NextFunction) => {
         Logger.error(err.message);
