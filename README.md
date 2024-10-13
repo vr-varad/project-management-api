@@ -1,5 +1,38 @@
 # Simple Product Management API
 
+## Setup Instructions
+To set up the Simple Product Management API, follow these steps:
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/vr-varad/project-management-api.git
+   ```
+
+2. Navigate into the project directory:
+   ```bash
+   cd project-management-api
+   ```
+
+3. Install the dependencies:
+   ```bash
+   npm install
+   ```
+
+4. Run the application in development mode:
+   ```bash
+   npm run dev
+   ```
+
+5. For production mode, build the application:
+   ```bash
+   npm build
+   ```
+
+6. Start the application in production mode:
+   ```bash
+   npm start
+   ```
+
 ## Goals
 - Enable CRUD operations on products.
 - Allow filtering of products by name and category.
@@ -91,4 +124,13 @@
   - `price`: Number
   - `description`: String
   - `category`: String
+
+
+
+
+
+
+
+
+
 
