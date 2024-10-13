@@ -61,6 +61,40 @@ const GetProductById = async (
         next(error)
     }
 }
+
+const GetProductByName = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
+    try {
+        const { name: productName} = req.params
+        const product = await projectService.GetProductByName(productName)
+        res.status(StatusCodes.OK).json({
+            success: true,
+            product
+        })
+    } catch (error) {
+        next(error)
+    }
+}
+const GetProductByCategory = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
+    try {
+        const { category: productCategory } = req.params
+        const product = await projectService.GetProductByCategory(productCategory)
+        res.status(StatusCodes.OK).json({
+            success: true,
+            product
+        })
+    } catch (error) {
+        next(error)
+    }
+}
+
 const UpdateProduct = async (
     req: Request,
     res: Response,
@@ -106,6 +140,8 @@ export {
     AddProduct,
     GetAllProducts,
     GetProductById,
+    GetProductByName,
+    GetProductByCategory,
     UpdateProduct,
     DeleteProduct
 }

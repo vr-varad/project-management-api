@@ -19,7 +19,7 @@ class ProductService {
             throw new DataBaseError((error as Error).message)
         }
     }
-    async GetAllProducts(page: number, pageSize: number) {
+    async GetAllProducts(page: number = 1, pageSize: number = 10) {
         try {
             const products = await Product.findAll({
                 limit: pageSize,
@@ -42,6 +42,39 @@ class ProductService {
             throw new DataBaseError((error as Error).message)
         }
     }
+
+    async GetProductByName(ProductName: string) {
+        try {
+            const products = await Product.findAll({
+                where: {
+                    name: ProductName
+                }
+            })
+            return products
+        } catch (error) {
+            Logger.error(
+                `Service Layer Error: Error Getting Product With Name ${ProductName}`
+            )
+            throw new DataBaseError((error as Error).message)
+        }
+    }
+
+    async GetProductByCategory(ProductCategory: string) {
+        try {
+            const products = await Product.findAll({
+                where: {
+                    category: ProductCategory
+                }
+            })
+            return products
+        } catch (error) {
+            Logger.error(
+                `Service Layer Error: Error Getting Product With Category ${ProductCategory}`
+            )
+            throw new DataBaseError((error as Error).message)
+        }
+    }
+
     async UpdateProduct(
         ProductId: number,
         ProductData: Partial<UpdateProductInputs>
